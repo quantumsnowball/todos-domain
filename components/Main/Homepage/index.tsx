@@ -8,6 +8,7 @@ import { RootState } from '../../../redux/store';
 import { TodoWithId } from '../../../types';
 import { CenterContent, Stretch, Overflow } from '../../styled/containers'
 import TodoCard from './TodoCard';
+import TodoCreator from './TodoCreator';
 
 
 const TodosDiv = styled(Overflow(Stretch(CenterContent('div'))))`
@@ -65,6 +66,7 @@ export default function Homepage() {
             <TodosContentDiv className='todosContent-ctn'>
               {todos.map((todo: TodoWithId) => <TodoCard key={todo._id} {...todo} />)}
             </TodosContentDiv>
+            <TodoCreator />
           </TodosDiv>
         </>
         :

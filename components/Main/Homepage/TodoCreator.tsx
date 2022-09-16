@@ -3,14 +3,13 @@ import {
   Button,
   TextField
 } from "@mui/material"
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import { useState } from "react"
-import { Todo } from "../../../../../types"
-import { addTodos, renewToken } from "../../../../utils/fetch"
+import { Todo } from "../../../types"
+import { addTodos, renewToken } from "../../../utils/fetch"
 import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../../../../redux/store"
-import { contentActions } from "../../../../redux/slices/contentSlice"
-import { Stretch } from "../../../styled/containers"
+import { RootState } from "../../../redux/store"
+import { contentActions } from "../../../redux/slices/contentSlice"
 
 
 const Div = styled('div')`
@@ -25,7 +24,7 @@ export default function TodoCreater() {
   const [titleDraft, setTitleDraft] = useState('')
   const [contentDraft, setContentDraft] = useState('')
   const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const router = useRouter()
 
   const onAddTodo = async () => {
     const title = titleDraft
@@ -46,7 +45,7 @@ export default function TodoCreater() {
         await onAddTodo()
       } else {
         // renew from server failed, need a new refresh token, navigate to /login
-        navigate('/login')
+        router.push('/login')
       }
       return
     }
