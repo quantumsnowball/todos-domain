@@ -1,5 +1,5 @@
 import { createTheme, styled, ThemeProvider } from '@mui/material'
-import { CustomFC } from '../types'
+import { CustomFC } from '../types/frontend'
 import MenuBar from './MenuBar'
 import Main from './Main'
 import { CenterContent } from './styled/containers'

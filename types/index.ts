@@ -1,6 +1,11 @@
-import { FC, PropsWithChildren } from 'react'
+export interface Todo {
+  title: string,
+  content: string
+}
 
+export interface _Id {
+  _id: string
+}
 
-export type CustomFC = FC<PropsWithChildren>
+export type TodoWithId = Todo & _Id
 
-export type ThemeName = 'elementary' | 'beach' | 'forest' | 'rose' | 'sunset' | 'ocean'

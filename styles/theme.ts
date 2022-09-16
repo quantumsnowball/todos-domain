@@ -1,5 +1,5 @@
 import { PaletteMode } from '@mui/material'
-import { ThemeName } from '../types'
+import { ThemeName } from '../types/frontend'
 
 
 const elementary = (mode: PaletteMode) => ({

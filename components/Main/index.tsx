@@ -1,6 +1,6 @@
 import { Stretch, CenterContent, Overflow } from '../styled/containers'
 import { styled } from '@mui/material'
-import { CustomFC } from '../../types'
+import { CustomFC } from '../../types/frontend'
 
 
 // .main-ctn
