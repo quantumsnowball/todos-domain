@@ -25,7 +25,7 @@ export interface TokenPayload extends UserFilter {
   id: number,
 }
 
-export type MongoOperation<R, P> = (client: Collection, payload?: P) => Promise<R>
+export type MongoOperation<R, P> = (client: Collection, payload: P) => Promise<R>
 
 export type NextHandler<ResData> = (
   req: NextApiRequest,
