@@ -1,3 +1,6 @@
+import { store, persistor } from '../redux/store'
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 import { createTheme, styled, ThemeProvider } from '@mui/material'
 import { CustomFC } from '../types/frontend'
 import MenuBar from './MenuBar'
@@ -25,14 +28,18 @@ const App: CustomFC = ({ children }) => {
   const theme = useCallback(() => createTheme(chooseTheme(name)(mode)), [name, mode])
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <ThemeProvider theme={theme}>
-        <FlexColumnDiv id="app-ctn">
-          <MenuBar />
-          <Main> {children} </Main>
-        </FlexColumnDiv>
-      </ThemeProvider>
-    </ThemeProvider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <ThemeProvider theme={defaultTheme}>
+          <ThemeProvider theme={theme}>
+            <FlexColumnDiv id="app-ctn">
+              <MenuBar />
+              <Main> {children} </Main>
+            </FlexColumnDiv>
+          </ThemeProvider>
+        </ThemeProvider>
+      </PersistGate>
+    </Provider>
   )
 }
 

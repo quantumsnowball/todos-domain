@@ -3,7 +3,11 @@ import {
   Typography
 } from '@mui/material'
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
+import { TodoWithId } from '../../../types';
 import { CenterContent, Stretch, Overflow } from '../../styled/containers'
+import TodoCard from './TodoCard';
 
 
 const TodosDiv = styled(Overflow(Stretch(CenterContent('div'))))`
@@ -20,10 +24,9 @@ const LoggedOutDiv = styled(Stretch(CenterContent('div')))`
 `;
 
 export default function Homepage() {
-  // const refreshToken = useSelector((s: RootState) => s.token.refreshToken)
-  const refreshToken = null // TODO
-  // const todos = useSelector((s: RootState) => s.content.todos)
-  // TODO
+  const refreshToken = useSelector((s: RootState) => s.token.refreshToken)
+  const todos = useSelector((s: RootState) => s.content.todos)
+  console.log(todos)
 
   // useEffect(() => {
   //   const fetchTodos = async () => {
@@ -60,7 +63,7 @@ export default function Homepage() {
         <>
           <TodosDiv className='todos-ctn'>
             <TodosContentDiv className='todosContent-ctn'>
-              {/* todos.map((todo: TodoWithId) => <TodoCard key={todo._id} {...todo} />) */}
+              {todos.map((todo: TodoWithId) => <TodoCard key={todo._id} {...todo} />)}
             </TodosContentDiv>
           </TodosDiv>
         </>
