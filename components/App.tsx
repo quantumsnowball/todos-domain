@@ -1,6 +1,7 @@
 import { styled } from '@mui/material'
 import { CustomFC } from '../types'
 import MenuBar from './MenuBar'
+import Main from './Main'
 import { CenterContent } from './styled/containers'
 
 
@@ -16,9 +17,9 @@ const FlexColumnDiv = styled(CenterContent('div'))`
 
 const App: CustomFC = ({ children }) => {
   return (
-    <FlexColumnDiv className="app-ctn">
+    <FlexColumnDiv id="app-ctn">
       <MenuBar />
-      {children}
+      <Main> {children} </Main>
     </FlexColumnDiv>
   )
 }
