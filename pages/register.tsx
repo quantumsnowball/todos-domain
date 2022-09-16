@@ -1,15 +1,14 @@
 import type { NextPage } from 'next'
 import App from '../components/App'
-import Login from '../components/Main/Login'
 
 
-const login: NextPage = () => {
+const register: NextPage = () => {
   return (
     <App>
-      <Login />
+      <p>register</p>
     </App>
   )
 }
 
-export default login
+export default register
 
