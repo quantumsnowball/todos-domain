@@ -1,4 +1,6 @@
 import { styled } from '@mui/material'
+import { CustomFC } from '../types'
+import MenuBar from './MenuBar'
 import { CenterContent } from './styled/containers'
 
 
@@ -12,10 +14,11 @@ const FlexColumnDiv = styled(CenterContent('div'))`
   background-color: ${props => props.theme.palette.background.default};
 `
 
-const App = () => {
+const App: CustomFC = ({ children }) => {
   return (
     <FlexColumnDiv className="app-ctn">
-      <p> App Component </p>
+      <MenuBar />
+      {children}
     </FlexColumnDiv>
   )
 }

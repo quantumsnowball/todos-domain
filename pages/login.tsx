@@ -2,12 +2,13 @@ import type { NextPage } from 'next'
 import App from '../components/App'
 
 
-const Home: NextPage = () => {
+const Login: NextPage = () => {
   return (
     <App>
-      <p>Home Page</p>
+      <p>Login Page</p>
     </App>
   )
 }
 
-export default Home
+export default Login
+
