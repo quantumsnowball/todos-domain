@@ -3,13 +3,14 @@ import {
   Typography
 } from '@mui/material'
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { contentActions } from '../../../redux/slices/contentSlice';
 import { RootState } from '../../../redux/store';
 import { TodoWithId } from '../../../types';
-import { getTodos } from '../../../utils/frontend/fetch';
+import { getTodos, renewToken } from '../../../utils/frontend/fetch';
 import { CenterContent, Stretch, Overflow } from '../../styled/containers'
 import TodoCard from './TodoCard';
 import TodoCreator from './TodoCreator';
@@ -30,6 +31,7 @@ const LoggedOutDiv = styled(Stretch(CenterContent('div')))`
 
 export default function Homepage() {
   const dispatch = useDispatch()
+  const router = useRouter()
   const refreshToken = useSelector((s: RootState) => s.token.refreshToken)
   const todos = useSelector((s: RootState) => s.content.todos)
 
@@ -39,14 +41,14 @@ export default function Homepage() {
       // access token is invalid
       if (getResult.status === 401) {
         console.log(getResult.message)
-        // const renewResult = await renewToken(refreshToken)
-        // if (renewResult.status === 200) {
-        //   // trigger fetchTodos() to run again to get the todos list
-        //   await fetchTodos()
-        // } else {
-        //   // renew from server failed, need a new refresh token, navigate to /login
-        //   // navigate('/login') // TODO
-        // }
+        const renewResult = await renewToken(refreshToken)
+        if (renewResult.status === 200) {
+          // trigger fetchTodos() to run again to get the todos list
+          await fetchTodos()
+        } else {
+          // renew from server failed, need a new refresh token, navigate to /login
+          router.push('/login') // TODO
+        }
         return
       }
       // access token is valid, but failed to read todo for other reasons

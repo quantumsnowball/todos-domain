@@ -7,7 +7,7 @@ import {
   REFRESH_TOKEN_SECRET
 } from '../../../constants'
 import {
-  MiddlewareLast,
+  Middleware,
   TokenPayload
 } from '../../../types/backend'
 
@@ -25,7 +25,7 @@ const sign = (email: string) => {
   return { accessToken, refreshToken }
 }
 
-export const signAfterLogin: MiddlewareLast = async (req, res) => {
+export const signAfterLogin: Middleware = async (req, res) => {
   // sign token
   const { email } = req.body
   const { accessToken, refreshToken } = sign(email)

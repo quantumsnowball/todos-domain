@@ -9,4 +9,6 @@ POST http://localhost:3000/api/todos
 PUT http://localhost:3000/api/todos
 DELETE http://localhost:3000/api/todos
 
-GET http://localhost:3000/api/redis
+POST http://localhost:3000/api/login
+
+POST http://localhost:3000/api/renew
