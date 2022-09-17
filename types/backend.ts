@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { Collection } from 'mongodb'
 import { Todo } from '.'
+import { Nextable } from 'next-connect/dist/types/types'
+import { RequestHandler } from 'next-connect/dist/types/node'
 
 
 export interface User {
@@ -31,4 +33,21 @@ export type NextHandler<ResData> = (
   req: NextApiRequest,
   res: NextApiResponse<ResData>
 ) => void
+
+type ResData = {
+  message?: string,
+  refreshToken?: string
+}
+
+export type Request = NextApiRequest
+
+export interface Response<R = ResData> extends NextApiResponse<R> {
+  cookie(name: string, value: string): void
+}
+
+export type Middleware<R = ResData> =
+  Nextable<RequestHandler<NextApiRequest, Response<R>>>
+
+export type MiddlewareLast<R = ResData> =
+  RequestHandler<NextApiRequest, Response<R>>
 
