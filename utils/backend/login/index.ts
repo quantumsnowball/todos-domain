@@ -10,25 +10,23 @@ import {
   Middleware,
   TokenPayload
 } from '../../../types/backend'
+import tokens from '../database/redis'
 
 
-export const tokens: string[] = []
-
-
-const sign = (email: string) => {
+const sign = async (email: string) => {
   const payload: TokenPayload = { id: Date.now(), user: email }
   const accessToken = jwt.sign(
     { ...payload }, ACCESS_TOKEN_SECRET, { expiresIn: ACCESS_TOKEN_LIFETIME })
   const refreshToken = jwt.sign(
     { ...payload }, REFRESH_TOKEN_SECRET, { expiresIn: REFRESH_TOKEN_LIFETIME })
-  tokens.push(refreshToken)
+  await tokens.push(refreshToken)
   return { accessToken, refreshToken }
 }
 
 export const signAfterLogin: Middleware = async (req, res) => {
   // sign token
   const { email } = req.body
-  const { accessToken, refreshToken } = sign(email)
+  const { accessToken, refreshToken } = await sign(email)
   setCookie('accessToken', accessToken, { req, res, httpOnly: true })
   return res
     .json({

@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { tokens } from './login'
+import tokens from './database/redis'
 import { Middleware, TokenPayload } from '../../types/backend'
 import {
   ACCESS_TOKEN_LIFETIME,
@@ -9,10 +9,10 @@ import {
 import { setCookie } from 'cookies-next'
 
 
-export const checkRefreshToken: Middleware = (req, res, next) => {
+export const checkRefreshToken: Middleware = async (req, res, next) => {
   const { refreshToken } = req.body
   try {
-    const tokenExists = tokens.includes(refreshToken) // TODO
+    const tokenExists = await tokens.includes(refreshToken) // TODO
     const tokenVerified = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET)
     if (tokenExists && tokenVerified) {
       next()

@@ -18,5 +18,6 @@ export const USERS_COLLECTION = process.env.USERS_COLLECTION as string
 export const PENDING_COLLECTION = process.env.PENDING_COLLECTION as string
 export const OAUTH_COLLECTION = process.env.OAUTH_COLLECTION as string
 export const TODOS_COLLECTION = process.env.TODOS_COLLECTION as string
+export const REFRESH_TOKENS_SET = process.env.REFRESH_TOKENS_SET as string
 export const ACCESS_TOKEN_LIFETIME = process.env.ACCESS_TOKEN_LIFETIME as string
 export const REFRESH_TOKEN_LIFETIME = process.env.REFRESH_TOKEN_LIFETIME as string
