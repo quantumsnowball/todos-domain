@@ -8,12 +8,25 @@ import {
 import MenuIcon from '@mui/icons-material/Menu'
 import { useTheme } from '@mui/material'
 import Link from 'next/link'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../redux/store'
+import { tokenActions } from '../../redux/slices/tokenSlice'
 
 
 function MenuBar() {
-  const refreshToken = null
+  const dispatch = useDispatch()
+  const refreshToken = useSelector((s: RootState) => s.token.refreshToken)
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+
+  const handleLogout = async () => {
+    await fetch('/api/logout', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ refreshToken })
+    })
+    dispatch(tokenActions.setRefreshToken(null))
+  }
 
   return (
     <AppBar position={isMobile ? "fixed" : "static"}>
@@ -35,7 +48,7 @@ function MenuBar() {
           <Link href='/'>TODOs</Link>
         </Typography>
         {refreshToken ?
-          <Button color="inherit" >
+          <Button color="inherit" onClick={handleLogout}>
             <Link href='/'>Logout</Link>
           </Button>
           : <Button color="inherit" >
