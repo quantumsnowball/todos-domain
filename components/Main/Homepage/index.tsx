@@ -37,19 +37,18 @@ export default function Homepage() {
     const fetchTodos = async () => {
       const getResult = await getTodos()
       // access token is invalid
-      // TODO
-      // if (getResult.status === 401) {
-      //   console.log(getResult.message)
-      //   const renewResult = await renewToken(refreshToken)
-      //   if (renewResult.status === 200) {
-      //     // trigger fetchTodos() to run again to get the todos list
-      //     await fetchTodos()
-      //   } else {
-      //     // renew from server failed, need a new refresh token, navigate to /login
-      //     // navigate('/login') // TODO
-      //   }
-      //   return
-      // }
+      if (getResult.status === 401) {
+        console.log(getResult.message)
+        // const renewResult = await renewToken(refreshToken)
+        // if (renewResult.status === 200) {
+        //   // trigger fetchTodos() to run again to get the todos list
+        //   await fetchTodos()
+        // } else {
+        //   // renew from server failed, need a new refresh token, navigate to /login
+        //   // navigate('/login') // TODO
+        // }
+        return
+      }
       // access token is valid, but failed to read todo for other reasons
       if (getResult.status !== 200) {
         console.log(getResult.message)

@@ -36,7 +36,9 @@ export type NextHandler<ResData> = (
 
 type ResData = {
   message?: string,
-  refreshToken?: string
+  refreshToken?: string,
+  url?: string,
+  payload?: any,
 }
 
 export type Request = NextApiRequest
@@ -45,9 +47,5 @@ export interface Response<R = ResData> extends NextApiResponse<R> {
   cookie(name: string, value: string): void
 }
 
-export type Middleware<R = ResData> =
-  Nextable<RequestHandler<NextApiRequest, Response<R>>>
-
-export type MiddlewareLast<R = ResData> =
-  RequestHandler<NextApiRequest, Response<R>>
+export type Middleware<R = ResData> = Nextable<RequestHandler<Request, Response<R>>>
 

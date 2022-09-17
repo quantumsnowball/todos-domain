@@ -2,6 +2,9 @@ import { Button, FormControl, styled, TextField, Typography } from '@mui/materia
 import { useState } from 'react'
 import Link from 'next/link'
 import { CenterContent, Stretch } from '../styled/containers'
+import { useRouter } from 'next/router'
+import { useDispatch } from 'react-redux'
+import { tokenActions } from '../../redux/slices/tokenSlice'
 
 
 const Div = styled(Stretch(CenterContent('div')))`
@@ -11,6 +14,8 @@ const Div = styled(Stretch(CenterContent('div')))`
 `
 
 const Login = () => {
+  const dispatch = useDispatch()
+  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -23,9 +28,8 @@ const Login = () => {
     try {
       const body = await res.json()
       if (res.status === 200) {
-        // TODO
-        // dispatch(tokenActions.setRefreshToken(body.refreshToken))
-        // navigate('/')
+        dispatch(tokenActions.setRefreshToken(body.refreshToken))
+        router.push('/')
       } else {
         alert(body.message)
       }

@@ -1,38 +1,15 @@
-import { DATABASE, TODOS_COLLECTION } from "../../constants"
-import { TodoWithId } from "../../types"
-import { NextHandler } from "../../types/backend"
-import db from '../../utils/backend/database'
+import { createRouter } from 'next-connect'
+import { Request, Response } from '../../types/backend'
+import { defaultHandlerOptions } from '../../utils/backend'
+import { checkAccessToken, fetchTodos } from '../../utils/backend/resources'
 
 
-type ResData = {
-  message?: string
-  payload?: TodoWithId[]
-}
+const router = createRouter<Request, Response>()
 
-const handler: NextHandler<ResData> = async (req, res) => {
-  // post
-  if (req.method === 'POST') {
-    // check access token here
-    // TODO
-    // return the result
-    const user = 'a@b.c'//decoded.user
-    const filter = { user }
-    const todos = await db.findTodos(DATABASE, TODOS_COLLECTION, filter)
-    if (!todos)
-      return res.status(400).json({ message: 'Failed to find todos.' })
-    return res.status(200).json({ payload: todos })
-  }
-  // put
-  if (req.method === 'PUT') {
-    // check access token here
-    // TODO
-    // insert to database
-    // TODO
-    return res.status(200).json({ message: 'TODO' })
-  }
-  // other methods are not supported
-  return res.status(400).json({ message: 'Wrong method.' })
-}
+router
+  .post(
+    checkAccessToken,
+    fetchTodos
+  )
 
-export default handler
-
+export default router.handler(defaultHandlerOptions)
