@@ -1,7 +1,7 @@
 import { MongoClient, Collection, ObjectId } from 'mongodb'
-import { URL_MONGO } from '../constants'
-import { TodoWithId, _Id } from '../types'
-import { MongoOperation, PendingUser, TodoDocument, User, UserFilter, UserWithPassword } from '../types/backend'
+import { URL_MONGO } from '../../constants'
+import { TodoWithId, _Id } from '../../types'
+import { MongoOperation, PendingUser, TodoDocument, User, UserFilter, UserWithPassword } from '../../types/backend'
 
 
 // operation decorator

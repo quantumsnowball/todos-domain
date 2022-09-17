@@ -6,7 +6,7 @@ import {
 import { useRouter } from 'next/router'
 import { useState } from "react"
 import { Todo } from "../../../types"
-import { addTodos, renewToken } from "../../../utils/fetch"
+import { addTodos, renewToken } from "../../../utils/frontend/fetch"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
 import { contentActions } from "../../../redux/slices/contentSlice"

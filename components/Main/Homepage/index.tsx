@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { contentActions } from '../../../redux/slices/contentSlice';
 import { RootState } from '../../../redux/store';
 import { TodoWithId } from '../../../types';
-import { getTodos } from '../../../utils/fetch';
+import { getTodos } from '../../../utils/frontend/fetch';
 import { CenterContent, Stretch, Overflow } from '../../styled/containers'
 import TodoCard from './TodoCard';
 import TodoCreator from './TodoCreator';

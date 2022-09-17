@@ -1,6 +1,6 @@
-import { Todo, TodoWithId, _Id } from '../types'
-import { FetchBody, Token } from '../types/frontend'
-import { FetchResult } from '../types/frontend'
+import { Todo, TodoWithId, _Id } from '../../types'
+import { FetchBody, Token } from '../../types/frontend'
+import { FetchResult } from '../../types/frontend'
 
 
 export const renewToken = async (refreshToken: Token): Promise<FetchResult> => {

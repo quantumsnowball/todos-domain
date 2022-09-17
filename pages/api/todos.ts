@@ -1,7 +1,7 @@
 import { DATABASE, TODOS_COLLECTION } from "../../constants"
 import { TodoWithId } from "../../types"
 import { NextHandler } from "../../types/backend"
-import db from '../../utils/database'
+import db from '../../utils/backend/database'
 
 
 type ResData = {

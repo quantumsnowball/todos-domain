@@ -4,7 +4,7 @@ import {
   IconButton,
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { deleteTodo, renewToken } from '../../../utils/fetch'
+import { deleteTodo, renewToken } from '../../../utils/frontend/fetch'
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
 import { Stretch } from '../../styled/containers'

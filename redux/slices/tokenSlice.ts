@@ -5,8 +5,7 @@ import { Token } from '../../types/frontend'
 const tokenSlice = createSlice({
   name: 'token',
   initialState: {
-    // refreshToken: null as Token,
-    refreshToken: 'token1234' as Token,
+    refreshToken: null as Token
   },
   reducers: {
     setRefreshToken: (s, a: PayloadAction<Token>) => {
