@@ -1,11 +1,11 @@
 import jwt from 'jsonwebtoken'
-import tokens from './database/redis'
-import { Middleware, TokenPayload } from '../../types/backend'
+import tokens from '../database/redis'
+import { Middleware, TokenPayload } from '../../../types/backend'
 import {
   ACCESS_TOKEN_LIFETIME,
   ACCESS_TOKEN_SECRET,
   REFRESH_TOKEN_SECRET
-} from '../../constants'
+} from '../../../constants'
 import { setCookie } from 'cookies-next'
 
 

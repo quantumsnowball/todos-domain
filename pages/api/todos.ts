@@ -1,7 +1,8 @@
 import { createRouter } from 'next-connect'
 import { Request, Response } from '../../types/backend'
 import { defaultHandlerOptions } from '../../utils/backend'
-import { checkAccessToken, deleteTodo, fetchTodos, insertTodo } from '../../utils/backend/resources'
+import { checkAccessToken } from '../../utils/backend/author'
+import { deleteTodo, fetchTodos, insertTodo } from '../../utils/backend/resources'
 
 
 const router = createRouter<Request, Response>()

@@ -1,31 +1,9 @@
-import jwt, { TokenExpiredError } from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 import db from './database/mongo'
 import { _Id } from '../../types'
 import { Middleware, TodoDocument } from '../../types/backend'
-import {
-  ACCESS_TOKEN_SECRET,
-  DATABASE,
-  TODOS_COLLECTION
-} from '../../constants'
+import { DATABASE, TODOS_COLLECTION } from '../../constants'
 
-
-export const checkAccessToken: Middleware = (req, res, next) => {
-  const { accessToken } = req.cookies
-  if (!accessToken)
-    return res.status(401)
-  // check if the jwt token is still valid
-  try {
-    jwt.verify(accessToken, ACCESS_TOKEN_SECRET)
-    next()
-  } catch (error) {
-    if (error instanceof TokenExpiredError)
-      return res.status(401).json({
-        message: 'Your access token is expired, needs renewal.',
-        url: `${req.headers.origin}/renew`
-      })
-    return res.status(400).json({ message: 'Error in token verification.' })
-  }
-}
 
 export const fetchTodos: Middleware = async (req, res) => {
   const { accessToken } = req.cookies
