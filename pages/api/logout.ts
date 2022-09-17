@@ -1,7 +1,7 @@
 import { createRouter } from 'next-connect'
 import { Request, Response } from '../../types/backend'
 import { defaultHandlerOptions } from '../../utils/backend'
-import { logout } from '../../utils/backend/login'
+import { logout } from '../../utils/backend/authen/logout'
 
 
 const router = createRouter<Request, Response>()
