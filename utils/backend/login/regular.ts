@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 import { DATABASE, USERS_COLLECTION } from '../../../constants'
 import { Middleware } from '../../../types/backend'
-import db from '../database'
+import db from '../database/mongo'
 
 
 export const checkUserEmailPassword: Middleware = async (req, res, next) => {

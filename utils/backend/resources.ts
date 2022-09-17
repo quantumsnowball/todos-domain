@@ -1,5 +1,5 @@
 import jwt, { TokenExpiredError } from 'jsonwebtoken'
-import db from './database'
+import db from './database/mongo'
 import { _Id } from '../../types'
 import { Middleware } from '../../types/backend'
 import {
