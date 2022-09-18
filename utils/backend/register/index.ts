@@ -56,7 +56,7 @@ export const verifyPendingUser: Middleware = async (req, res, next) => {
     return res.status(406).json({ message: `Activation for ${pendingUser.email} failed.` })
   // pass user to next
   const { email, hashedPassword } = foundPendingUser
-  req.body.verifiedUser = { email, hashedPassword }
+  req.verifiedUser = { email, hashedPassword }
   // delete pending user
   await db.deletePendingUsers(DATABASE, PENDING_COLLECTION, { email })
   // all checks passed
@@ -65,9 +65,9 @@ export const verifyPendingUser: Middleware = async (req, res, next) => {
 
 export const addNewUserSampleData: Middleware = async (req, res, next) => {
   // ensure verifiedUser exists
-  if (!req.body.verifiedUser)
+  if (!req.verifiedUser)
     return res.status(404).json({ message: 'Failed to activate user, please register again.' })
-  const email = req.body.verifiedUser.email
+  const email = req.verifiedUser.email
   // insert a new entry for the new user
   await db.insertTodo(DATABASE, TODOS_COLLECTION, {
     user: email, title: `Hello ${email}`, content: `Hi! This is your first task.`
@@ -77,17 +77,16 @@ export const addNewUserSampleData: Middleware = async (req, res, next) => {
 
 export const registerUserToDatabase: Middleware = async (req, res) => {
   // ensure a verifiedUser exists
-  if (!req.body.verifiedUser)
+  if (!req.verifiedUser)
     return res.status(404).json({ message: 'Failed to activate user, please register again.' })
-  const { email, hashedPassword } = req.body.verifiedUser as UserWithPassword
+  const { email, hashedPassword } = req.verifiedUser as UserWithPassword
   // add verified user to database
   db.insertUser(DATABASE, USERS_COLLECTION, { email, hashedPassword })
-  setCookie('message', 'User verified successfully, you may login now.')
-  return res.status(200)
-    .redirect('/login')
+  setCookie('message', 'User verified successfully, you may login now.', { req, res })
+  return res.status(200).redirect('/login')
 }
 
-export const upsertOAuthUserToDatabase: Middleware = async (req, res, next) => {
+export const upsertOAuthUserToDatabase: Middleware = async (req, _, next) => {
   // upsert oauth user
   const { email } = req.body
   db.upsertOAuthUser(DATABASE, OAUTH_COLLECTION, { email })

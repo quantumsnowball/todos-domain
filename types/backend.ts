@@ -41,7 +41,9 @@ type ResData = {
   payload?: any,
 }
 
-export type Request = NextApiRequest
+export interface Request extends NextApiRequest {
+  verifiedUser?: UserWithPassword
+}
 
 export interface Response<R = ResData> extends NextApiResponse<R> {
   cookie(name: string, value: string): void
