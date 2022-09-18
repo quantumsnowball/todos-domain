@@ -1,0 +1,14 @@
+GET http://localhost:3000/api/hello
+POST http://localhost:3000/api/hello
+PUT http://localhost:3000/api/hello
+DELETE http://localhost:3000/api/hello
+
+
+GET http://localhost:3000/api/todos
+POST http://localhost:3000/api/todos
+PUT http://localhost:3000/api/todos
+DELETE http://localhost:3000/api/todos
+
+POST http://localhost:3000/api/login
+
+POST http://localhost:3000/api/renew
