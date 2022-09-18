@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { CenterContent, Stretch } from '../styled/containers'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
-import { tokenActions } from '../../redux/slices/tokenSlice'
+import { sessionActions } from '../../redux/slices/sessionSlice'
 import { getJwtUser } from '../../utils'
 
 
@@ -29,8 +29,8 @@ const Login = () => {
     try {
       const body = await res.json()
       if (res.status === 200) {
-        dispatch(tokenActions.setRefreshToken(body.refreshToken))
-        dispatch(tokenActions.setUser(getJwtUser(body.refreshToken)))
+        dispatch(sessionActions.setRefreshToken(body.refreshToken))
+        dispatch(sessionActions.setUser(getJwtUser(body.refreshToken)))
         router.push('/')
       } else {
         alert(body.message)

@@ -2,8 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Token } from '../../types/frontend'
 
 
-const tokenSlice = createSlice({
-  name: 'token',
+const sessionSlice = createSlice({
+  name: 'session',
   initialState: {
     user: null as string | null,
     refreshToken: null as Token
@@ -18,7 +18,7 @@ const tokenSlice = createSlice({
   }
 })
 
-export const tokenActions = tokenSlice.actions
+export const sessionActions = sessionSlice.actions
 
-export const tokenReducer = tokenSlice.reducer
+export const sessionReducer = sessionSlice.reducer
 

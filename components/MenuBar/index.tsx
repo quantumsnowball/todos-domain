@@ -10,7 +10,7 @@ import { useTheme } from '@mui/material'
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
-import { tokenActions } from '../../redux/slices/tokenSlice'
+import { sessionActions } from '../../redux/slices/sessionSlice'
 
 
 function MenuBar() {
@@ -26,8 +26,8 @@ function MenuBar() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ refreshToken })
     })
-    dispatch(tokenActions.setRefreshToken(null))
-    dispatch(tokenActions.setUser(null))
+    dispatch(sessionActions.setRefreshToken(null))
+    dispatch(sessionActions.setUser(null))
   }
 
   return (

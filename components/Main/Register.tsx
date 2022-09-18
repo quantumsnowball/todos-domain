@@ -1,5 +1,6 @@
 import { Button, FormControl, styled, TextField, Typography } from '@mui/material'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import { CenterContent, Stretch } from '../styled/containers'
 
@@ -15,6 +16,7 @@ export default function Register() {
   const [password, setPassword] = useState('')
   const [passwordAgain, setPasswordAgain] = useState('')
   const [passwordMatch, setPasswordMatch] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     setPasswordMatch(password === passwordAgain)
@@ -34,7 +36,7 @@ export default function Register() {
     try {
       const body = await res.json()
       alert(body.message)
-      // navigate('/login') // TODO
+      router.push('/login')
     } catch (error) {
       alert(error)
     }

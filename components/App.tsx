@@ -1,4 +1,4 @@
-import { store, persistor, RootState } from '../redux/store'
+import { store, persistor } from '../redux/store'
 import { Provider, useDispatch } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { createTheme, styled, ThemeProvider } from '@mui/material'
@@ -8,7 +8,7 @@ import Main from './Main'
 import { CenterContent } from './styled/containers'
 import { useCallback, useEffect } from 'react'
 import chooseTheme from '../styles/theme'
-import { tokenActions } from '../redux/slices/tokenSlice'
+import { sessionActions } from '../redux/slices/sessionSlice'
 import { useCookies } from 'react-cookie'
 import { getJwtUser } from '../utils'
 
@@ -33,8 +33,8 @@ const App: CustomFC = ({ children }) => {
   // grap if there is a refresh token in cookie
   useEffect(() => {
     if (cookies.refreshToken) {
-      dispatch(tokenActions.setRefreshToken(cookies.refreshToken))
-      dispatch(tokenActions.setUser(getJwtUser(cookies.refreshToken)))
+      dispatch(sessionActions.setRefreshToken(cookies.refreshToken))
+      dispatch(sessionActions.setUser(getJwtUser(cookies.refreshToken)))
       removeCookie('refreshToken')
     }
   }, [])
