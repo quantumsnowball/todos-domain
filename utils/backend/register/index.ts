@@ -86,9 +86,12 @@ export const registerUserToDatabase: Middleware = async (req, res) => {
   return res.status(200).redirect('/login')
 }
 
-export const upsertOAuthUserToDatabase: Middleware = async (req, _, next) => {
+export const upsertOAuthUserToDatabase: Middleware = async (req, res, next) => {
   // upsert oauth user
-  const { email } = req.body
+  const { email } = req
+  if (!email)
+    return res.status(400)
+  console.log({ email })
   db.upsertOAuthUser(DATABASE, OAUTH_COLLECTION, { email })
   next()
 }

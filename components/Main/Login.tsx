@@ -93,7 +93,6 @@ const Login = () => {
       </Button>
       <Typography variant="h4">or</Typography>
       <form action='/api/login-google'>
-        {/* TODO */}
         <Button
           fullWidth
           variant="contained"

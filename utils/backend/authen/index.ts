@@ -35,14 +35,16 @@ export const signAfterLogin: Middleware = async (req, res) => {
     })
 }
 
-// export const signAfterOAuth: RequestHandler = async (req, res) => {
-//   // sign token
-//   const { email } = req.body
-//   const { accessToken, refreshToken } = sign(email)
-//   return res
-//     .cookie('accessToken', accessToken, { httpOnly: true })
-//     .cookie('refreshToken', refreshToken)
-//     .redirect('/')
-// }
-//
+export const signAfterOAuth: Middleware = async (req, res) => {
+  // sign token
+  const { email } = req
+  if (!email)
+    return res.status(401)
+  const { accessToken, refreshToken } = await sign(email)
+  setCookie('accessToken', accessToken, { req, res, httpOnly: true })
+  setCookie('refreshToken', refreshToken, { req, res, })
+  return res
+    .redirect('/')
+}
+
 
