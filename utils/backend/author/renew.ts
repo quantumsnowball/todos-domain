@@ -7,6 +7,7 @@ import {
   REFRESH_TOKEN_SECRET
 } from '../../../constants'
 import { setCookie } from 'cookies-next'
+import { jwtDecode } from '../..'
 
 
 export const checkRefreshToken: Middleware = async (req, res, next) => {
@@ -26,8 +27,8 @@ export const checkRefreshToken: Middleware = async (req, res, next) => {
 export const renewToken: Middleware = (req, res) => {
   const { refreshToken } = req.body
   // decode to get back user infos
-  const decoded = jwt.decode(refreshToken)
-  if (!decoded || typeof decoded === 'string' || !decoded.hasOwnProperty('user'))
+  const decoded = jwtDecode(refreshToken)
+  if (!decoded)
     return res.status(400).json({ message: 'Failed to decode refreshToken.' })
   // sign new access token and return 200
   const payload: TokenPayload = { id: Date.now(), user: decoded.user }

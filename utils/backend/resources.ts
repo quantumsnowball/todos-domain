@@ -3,6 +3,7 @@ import db from './database/mongo'
 import { _Id } from '../../types'
 import { Middleware, TodoDocument } from '../../types/backend'
 import { DATABASE, TODOS_COLLECTION } from '../../constants'
+import { jwtDecode } from '..'
 
 
 export const fetchTodos: Middleware = async (req, res) => {
@@ -10,8 +11,8 @@ export const fetchTodos: Middleware = async (req, res) => {
   if (!accessToken)
     return res.status(401)
   // decode to get back user infos
-  const decoded = jwt.decode(accessToken)
-  if (!decoded || typeof decoded === 'string' || !decoded.hasOwnProperty('user'))
+  const decoded = jwtDecode(accessToken)
+  if (!decoded)
     return res.status(400).json({ message: 'Failed to decode refreshToken.' })
   // query database to return todos list
   const user = decoded.user
@@ -25,8 +26,8 @@ export const insertTodo: Middleware = async (req, res) => {
   if (!accessToken)
     return res.status(401)
   // decode to get back user infos
-  const decoded = jwt.decode(accessToken)
-  if (!decoded || typeof decoded === 'string' || !decoded.hasOwnProperty('user'))
+  const decoded = jwtDecode(accessToken)
+  if (!decoded)
     return res.status(400).json({ message: 'Failed to decode refreshToken.' })
   // add a new entry to database
   const user = decoded.user
@@ -44,8 +45,8 @@ export const deleteTodo: Middleware = async (req, res) => {
   if (!accessToken)
     return res.status(401)
   // decode to get back user infos
-  const decoded = jwt.decode(accessToken)
-  if (!decoded || typeof decoded === 'string' || !decoded.hasOwnProperty('user'))
+  const decoded = jwtDecode(accessToken)
+  if (!decoded)
     return res.status(400).json({ message: 'Failed to decode refreshToken.' })
   // remove the entry from collection
   const user = decoded.user
