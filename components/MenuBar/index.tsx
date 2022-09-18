@@ -16,6 +16,7 @@ import { tokenActions } from '../../redux/slices/tokenSlice'
 function MenuBar() {
   const dispatch = useDispatch()
   const refreshToken = useSelector((s: RootState) => s.token.refreshToken)
+  const user = useSelector((s: RootState) => s.token.user)
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
@@ -26,6 +27,7 @@ function MenuBar() {
       body: JSON.stringify({ refreshToken })
     })
     dispatch(tokenActions.setRefreshToken(null))
+    dispatch(tokenActions.setUser(null))
   }
 
   return (
@@ -45,7 +47,7 @@ function MenuBar() {
           component="div"
           sx={{ flexGrow: 1, cursor: 'pointer' }}
         >
-          <Link href='/'>TODOs</Link>
+          <Link href='/'>{user ? user : 'TODOs'}</Link>
         </Typography>
         {refreshToken ?
           <Button color="inherit" onClick={handleLogout}>

@@ -5,6 +5,7 @@ import { CenterContent, Stretch } from '../styled/containers'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 import { tokenActions } from '../../redux/slices/tokenSlice'
+import { getJwtUser } from '../../utils'
 
 
 const Div = styled(Stretch(CenterContent('div')))`
@@ -29,6 +30,7 @@ const Login = () => {
       const body = await res.json()
       if (res.status === 200) {
         dispatch(tokenActions.setRefreshToken(body.refreshToken))
+        dispatch(tokenActions.setUser(getJwtUser(body.refreshToken)))
         router.push('/')
       } else {
         alert(body.message)

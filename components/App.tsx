@@ -1,4 +1,4 @@
-import { store, persistor } from '../redux/store'
+import { store, persistor, RootState } from '../redux/store'
 import { Provider, useDispatch } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { createTheme, styled, ThemeProvider } from '@mui/material'
@@ -10,6 +10,7 @@ import { useCallback, useEffect } from 'react'
 import chooseTheme from '../styles/theme'
 import { tokenActions } from '../redux/slices/tokenSlice'
 import { useCookies } from 'react-cookie'
+import { getJwtUser } from '../utils'
 
 
 const defaultTheme = createTheme()
@@ -33,6 +34,7 @@ const App: CustomFC = ({ children }) => {
   useEffect(() => {
     if (cookies.refreshToken) {
       dispatch(tokenActions.setRefreshToken(cookies.refreshToken))
+      dispatch(tokenActions.setUser(getJwtUser(cookies.refreshToken)))
       removeCookie('refreshToken')
     }
   }, [])
