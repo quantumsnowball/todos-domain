@@ -37,7 +37,7 @@ export const signAfterLogin: Middleware = async (req, res) => {
 
 export const signAfterOAuth: Middleware = async (req, res) => {
   // sign token
-  const { email } = req
+  const { user: email } = req
   if (!email)
     return res.status(401)
   const { accessToken, refreshToken } = await sign(email)

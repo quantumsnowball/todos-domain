@@ -42,7 +42,7 @@ type ResData = {
 }
 
 export interface Request extends NextApiRequest {
-  email?: string
+  user?: string
   verifiedUser?: UserWithPassword
 }
 
