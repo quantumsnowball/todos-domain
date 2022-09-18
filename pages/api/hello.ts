@@ -1,16 +1,14 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { NextHandler } from "../../types/backend"
+import { createRouter } from 'next-connect'
+import { Request, Response } from '../../types/backend'
+import { defaultHandlerOptions } from '../../utils/backend'
 
 
-type ResData = {
-  message: string
-}
+const router = createRouter<Request, Response>()
 
-const handler: NextHandler<ResData> = (req, res) => {
-  if (req.method !== 'GET')
-    return res.status(400).json({ message: 'Please use GET request.' })
+router
+  .get(
+    (_req, res) => res.status(200).json({ message: 'Hello from NextJS api.' })
+  )
 
-  return res.status(200).json({ message: 'Hello from NextJS api.' })
-}
+export default router.handler(defaultHandlerOptions)
 
-export default handler

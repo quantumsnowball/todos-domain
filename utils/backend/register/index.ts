@@ -91,7 +91,6 @@ export const upsertOAuthUserToDatabase: Middleware = async (req, res, next) => {
   const email = req.user
   if (!email)
     return res.status(400)
-  console.log({ email })
   db.upsertOAuthUser(DATABASE, OAUTH_COLLECTION, { email })
   next()
 }
