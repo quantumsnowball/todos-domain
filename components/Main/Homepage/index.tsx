@@ -47,7 +47,7 @@ export default function Homepage() {
           await fetchTodos()
         } else {
           // renew from server failed, need a new refresh token, navigate to /login
-          router.push('/login') // TODO
+          router.push('/login')
         }
         return
       }

@@ -13,7 +13,7 @@ import { jwtDecode } from '../..'
 export const checkRefreshToken: Middleware = async (req, res, next) => {
   const { refreshToken } = req.body
   try {
-    const tokenExists = await tokens.includes(refreshToken) // TODO
+    const tokenExists = await tokens.includes(refreshToken)
     const tokenVerified = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET)
     if (tokenExists && tokenVerified) {
       next()
