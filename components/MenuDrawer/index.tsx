@@ -2,6 +2,7 @@ import { Box, Divider, SwipeableDrawer } from '@mui/material'
 import { MenuTitle } from './common'
 import ThemeMenu from './ThemeMenu'
 import AboutMenu from './AboutMenu'
+import SettingsMenu from './SettingsMenu'
 
 
 interface MenuDrawerProps {
@@ -29,6 +30,8 @@ function MenuDrawer({ menuOpen, setMenuOpen }: MenuDrawerProps) {
         <MenuTitle title="Todos" />
         <Divider />
         <ThemeMenu />
+        <Divider />
+        <SettingsMenu />
         <Divider />
         <AboutMenu />
       </Box>
