@@ -6,6 +6,8 @@ import {
   Button,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
+import LightModeIcon from '@mui/icons-material/LightMode'
+import DarkModeIcon from '@mui/icons-material/DarkMode'
 import { useTheme } from '@mui/material'
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,6 +15,7 @@ import { RootState } from '../../redux/store'
 import { sessionActions } from '../../redux/slices/sessionSlice'
 import MenuDrawer from '../MenuDrawer'
 import { useState } from 'react'
+import { themeActions } from '../../redux/slices/themeSlice'
 
 
 function MenuBar() {
@@ -62,6 +65,10 @@ function MenuBar() {
               <Link href='/login'>Login</Link>
             </Button>
           }
+          <IconButton onClick={() => dispatch(themeActions.toggleMode())}>
+            {theme.palette.mode === 'light' ?
+              <LightModeIcon sx={{ color: '#fff' }} /> : <DarkModeIcon />}
+          </IconButton>
         </Toolbar>
       </AppBar>
       <MenuDrawer {...{ menuOpen, setMenuOpen }} />
