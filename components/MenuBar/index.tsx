@@ -43,7 +43,7 @@ function MenuBar() {
           <MenuIcon />
         </IconButton>
         <Typography
-          variant="h6"
+          variant={isMobile ? "subtitle2" : "subtitle1"}
           component="div"
           sx={{ flexGrow: 1, cursor: 'pointer' }}
         >
