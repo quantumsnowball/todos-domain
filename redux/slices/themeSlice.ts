@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ColorMode, ThemeName } from '../../types'
+import { ColorMode, ThemeName } from '../../types/frontend'
 
 
 const themeSlice = createSlice({

@@ -4,11 +4,15 @@ import { createSlice } from '@reduxjs/toolkit'
 const layoutSlice = createSlice({
   name: 'layout',
   initialState: {
+    menuAccountExpanded: false,
     menuThemeExpanded: false,
     menuSettingsExpanded: false,
     menuAboutExpanded: false
   },
   reducers: {
+    toggleMenuAccountExpanded: s => {
+      s.menuAccountExpanded = !s.menuAccountExpanded
+    },
     toggleMenuThemeExpanded: s => {
       s.menuThemeExpanded = !s.menuThemeExpanded
     },

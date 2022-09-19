@@ -3,6 +3,7 @@ import { MenuTitle } from './common'
 import ThemeMenu from './ThemeMenu'
 import AboutMenu from './AboutMenu'
 import SettingsMenu from './SettingsMenu'
+import AccountMenu from './AccountMenu'
 
 
 interface MenuDrawerProps {
@@ -28,6 +29,8 @@ function MenuDrawer({ menuOpen, setMenuOpen }: MenuDrawerProps) {
       >
         { /*<MenuTitle title={`Todos, v${process.env.REACT_APP_VERSION}`} />*/}
         <MenuTitle title="Todos" />
+        <Divider />
+        <AccountMenu />
         <Divider />
         <ThemeMenu />
         <Divider />
