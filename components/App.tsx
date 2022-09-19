@@ -17,8 +17,9 @@ const defaultTheme = createTheme()
 
 const FlexColumnDiv = styled(CenterContent('div'))`
   /* cover full viewport */
-  height: 100vh;
-  max-height: 100vh;
+  position: fixed;
+  height: 100%;
+  width: 100%;
   justify-content: space-between;
   /* theme */
   color: ${props => props.theme.palette.text.primary};
