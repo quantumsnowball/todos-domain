@@ -11,6 +11,8 @@ import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { sessionActions } from '../../redux/slices/sessionSlice'
+import MenuDrawer from '../MenuDrawer'
+import { useState } from 'react'
 
 
 function MenuBar() {
@@ -19,6 +21,7 @@ function MenuBar() {
   const user = useSelector((s: RootState) => s.token.user)
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const handleLogout = async () => {
     await fetch('/api/logout', {
@@ -31,34 +34,38 @@ function MenuBar() {
   }
 
   return (
-    <AppBar position={isMobile ? "fixed" : "static"}>
-      <Toolbar>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Typography
-          variant={isMobile ? "subtitle2" : "subtitle1"}
-          component="div"
-          sx={{ flexGrow: 1, cursor: 'pointer' }}
-        >
-          <Link href='/'>{user ? user : 'TODOs'}</Link>
-        </Typography>
-        {refreshToken ?
-          <Button color="inherit" onClick={handleLogout}>
-            <Link href='/'>Logout</Link>
-          </Button>
-          : <Button color="inherit" >
-            <Link href='/login'>Login</Link>
-          </Button>
-        }
-      </Toolbar>
-    </AppBar>
+    <>
+      <AppBar position={isMobile ? "fixed" : "static"}>
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            variant={isMobile ? "subtitle2" : "subtitle1"}
+            component="div"
+            sx={{ flexGrow: 1, cursor: 'pointer' }}
+          >
+            <Link href='/'>{user ? user : 'TODOs'}</Link>
+          </Typography>
+          {refreshToken ?
+            <Button color="inherit" onClick={handleLogout}>
+              <Link href='/'>Logout</Link>
+            </Button>
+            : <Button color="inherit" >
+              <Link href='/login'>Login</Link>
+            </Button>
+          }
+        </Toolbar>
+      </AppBar>
+      <MenuDrawer {...{ menuOpen, setMenuOpen }} />
+    </>
   )
 }
 
