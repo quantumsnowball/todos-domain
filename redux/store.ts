@@ -7,12 +7,16 @@ import {
 import storage from 'redux-persist/lib/storage'
 import { sessionReducer } from './slices/sessionSlice'
 import { contentReducer } from './slices/contentSlice'
+import { themeReducer } from './slices/themeSlice'
+import { layoutReducer } from './slices/layoutSlice'
 
 
 // reducers
 const rootReducer = combineReducers({
   token: sessionReducer,
-  content: contentReducer
+  content: contentReducer,
+  theme: themeReducer,
+  layout: layoutReducer
 })
 
 // store
