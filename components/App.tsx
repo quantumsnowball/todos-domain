@@ -1,5 +1,5 @@
-import { store, persistor } from '../redux/store'
-import { Provider, useDispatch } from 'react-redux'
+import { store, persistor, RootState } from '../redux/store'
+import { Provider, useDispatch, useSelector } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { createTheme, styled, ThemeProvider } from '@mui/material'
 import { CustomFC } from '../types/frontend'
@@ -17,8 +17,9 @@ const defaultTheme = createTheme()
 
 const FlexColumnDiv = styled(CenterContent('div'))`
   /* cover full viewport */
-  height: 100vh;
-  max-height: 100vh;
+  position: fixed;
+  height: 100%;
+  width: 100%;
   justify-content: space-between;
   /* theme */
   color: ${props => props.theme.palette.text.primary};
@@ -56,9 +57,9 @@ const App: CustomFC = ({ children }) => {
   )
 }
 
-const AppProvider: CustomFC = ({ children }) => {
-  const mode = 'light'
-  const name = 'elementary'
+const ThemeWrapper: CustomFC = ({ children }) => {
+  const mode = useSelector((s: RootState) => s.theme.mode)
+  const name = useSelector((s: RootState) => s.theme.name)
   const theme = useCallback(() => createTheme(chooseTheme(name)(mode)), [name, mode])
 
   useEffect(() => {
@@ -66,16 +67,22 @@ const AppProvider: CustomFC = ({ children }) => {
   }, [theme])
 
   return (
+    <ThemeProvider theme={defaultTheme}>
+      <ThemeProvider theme={theme}>
+        <App> {children} </App>
+      </ThemeProvider>
+    </ThemeProvider>
+  )
+}
+
+const ReduxWrapper: CustomFC = ({ children }) => {
+  return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <ThemeProvider theme={defaultTheme}>
-          <ThemeProvider theme={theme}>
-            <App> {children} </App>
-          </ThemeProvider>
-        </ThemeProvider>
+        <ThemeWrapper> {children} </ThemeWrapper>
       </PersistGate>
     </Provider>
   )
 }
 
-export default AppProvider
+export default ReduxWrapper

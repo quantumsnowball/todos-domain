@@ -17,6 +17,11 @@ const Div = styled('div')`
   display: flex;
   margin: 10px;
   padding: 10px;
+  /* on mobile */
+  ${props => props.theme.breakpoints.down('sm')} {
+    position: fixed;
+    bottom: 0;
+  }
 `
 
 export default function TodoCreater() {

@@ -7,8 +7,12 @@ import { CenterContent, Stretch } from '../styled/containers'
 
 const Div = styled(Stretch(CenterContent('div')))`
   /* layout */
-  width: 30vw;
+  width: 50vw;
   height: 35vh;
+  /* on mobile */
+  ${props => props.theme.breakpoints.down("sm")} {
+    width: 80vw;
+  }
 `
 
 export default function Register() {

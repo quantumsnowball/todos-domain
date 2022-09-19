@@ -1,6 +1,9 @@
 import {
+  Box,
   styled,
-  Typography
+  Typography,
+  useMediaQuery,
+  useTheme
 } from '@mui/material'
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -34,6 +37,8 @@ export default function Homepage() {
   const router = useRouter()
   const refreshToken = useSelector((s: RootState) => s.token.refreshToken)
   const todos = useSelector((s: RootState) => s.content.todos)
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -66,6 +71,7 @@ export default function Homepage() {
 
   return (
     <>
+      {isMobile ? <Box sx={{ minHeight: '56px' }} /> : null}
       {refreshToken ?
         <>
           <TodosDiv className='todos-ctn'>
@@ -82,6 +88,7 @@ export default function Homepage() {
           </Typography>
         </LoggedOutDiv>
       }
+      {isMobile ? <Box sx={{ minHeight: '96px' }} /> : null}
     </>
   )
 }

@@ -1,4 +1,4 @@
-import { Button, FormControl, styled, TextField, Typography } from '@mui/material'
+import { Button, FormControl, styled, TextField, Typography, useMediaQuery, useTheme } from '@mui/material'
 import { useState } from 'react'
 import Link from 'next/link'
 import { CenterContent, Stretch } from '../styled/containers'
@@ -10,8 +10,12 @@ import { getJwtUser } from '../../utils'
 
 const Div = styled(Stretch(CenterContent('div')))`
   /* layout */
-  width: 30vw;
+  width: 50vw;
   height: 35vh;
+  /* on mobile */
+  ${props => props.theme.breakpoints.down("sm")} {
+    width: 80vw;
+  }
 `
 
 const Login = () => {
