@@ -79,7 +79,7 @@ function SettingsMenu() {
         <List>
           <MenuButton
             icon={<SystemUpdateIcon />}
-            text='Update App'
+            text='Reload App'
             onClick={e => {
               setReloadDialog(true)
               e.stopPropagation()
@@ -87,7 +87,7 @@ function SettingsMenu() {
             level={1}
           />
           <ConfirmDialog
-            title='Update App'
+            title='Reload App'
             content='This will reload all app files from the server. User data will remain saved. You may need to reopen this app to show all updated features.'
             open={reloadDialog}
             setOpen={setReloadDialog}
