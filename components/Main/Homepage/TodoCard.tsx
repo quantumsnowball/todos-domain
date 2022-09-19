@@ -2,6 +2,8 @@ import {
   styled,
   Card, Typography,
   IconButton,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { deleteTodo, renewToken } from '../../../utils/frontend/fetch'
@@ -32,6 +34,8 @@ export default function TodoCard({ _id, title, content }: TodoCardProps) {
   const refreshToken = useSelector((s: RootState) => s.token.refreshToken)
   const dispatch = useDispatch()
   const router = useRouter()
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   const onDeleteTodo = async () => {
     const deleteResult = await deleteTodo({ _id })
@@ -64,8 +68,8 @@ export default function TodoCard({ _id, title, content }: TodoCardProps) {
   return (
     <FlexCard sx={{ margin: '5px', padding: '5px' }}>
       <ContentDiv>
-        <Typography variant="h4">{title}</Typography>
-        <Typography variant="h6">{content}</Typography>
+        <Typography noWrap variant={isMobile ? "h6" : "h5"}>{title}</Typography>
+        <Typography noWrap variant={isMobile ? "subtitle1" : "h6"}>{content}</Typography>
       </ContentDiv>
       <IconButton
         size="large"
